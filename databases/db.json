@@ -1,8 +1,48 @@
 {
     "product:01990c0d-e00e-7a34-a088-22dfd56c68c9": {
+        "id": "01990c0d-e00e-7a34-a088-22dfd56c68c9",
         "title": "Steam Keys",
         "description": "<p>🔥<span> Todas as entregas são automáticas, garantindo rapidez e praticidade para você! 🔥</span><br></p>",
         "image": "https://cdn.mginex.com/static/images/icons/image-not-found.png",
         "footer": null
-    }
+    },
+    "product:01990c12-d6c4-7c0a-baa6-cd0fadf2530a": {
+        "id": "01990c12-d6c4-7c0a-baa6-cd0fadf2530a",
+        "title": "Canva PRO",
+        "description": "<p>✅ Você só precisa clicar no link e pronto: sua conta ativa no Pro<br>✅ Funciona na sua conta pessoal (Gmail, Facebook, etc.)<br>✅ Válido Por 1 Mes!<br>✅ Sem precisar compartilhar senha com ninguém</p>",
+        "image": "https://cdn.mginex.com/storage/673feaa6-22b1-4ac1-b3fd-ef50693b5fae.png",
+        "footer": null
+    },
+    "store": {
+        "id": "01990b6f-4075-710c-9303-cd74eb49be30",
+        "createdAt": "2025-09-02T17:17:44.438Z",
+        "updatedAt": "2025-09-03T20:45:16.000Z",
+        "ownerId": "0196352a-afeb-7d41-9af1-83279b381157",
+        "templateId": "delux",
+        "settings": {
+            "title": "Source One",
+            "subDomain": "ttt",
+            "contactInfo": {
+                "email": null,
+                "corporation": null,
+                "socialMedia": {}
+            },
+            "currency": "BRL",
+            "domain": null,
+            "description": "A melhor loja de produtos digitais com entrega imediata e suporte eficiente.",
+            "terms": null,
+            "isMaintenceEnabled": false
+        },
+        "theme": {
+            "logo": "https://cdn.mginex.com/storage/aad4348b-d6e9-495a-95b6-e600a0dfb832.png",
+            "favicon": "https://cdn.mginex.com/storage/99f6e8bf-cfe6-45de-8657-9c14428e52f8.png",
+            "primaryColor": "#19ff83"
+        },
+        "status": "ACTIVE",
+        "bannedAt": null,
+        "bannedReason": null,
+        "bans": [],
+        "url": "https://ttt.mginex.site"
+    },
+    "checkout:1379475047399428096": {}
 }

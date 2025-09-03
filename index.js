@@ -2,6 +2,7 @@ const { Client } = require("discord.js");
 const Discord = require("discord.js");
 const config = require("./config.json");
 const fg = require("fast-glob");
+const { api, db } = require("./@shared");
 
 const client = new Client({
   intents: [
@@ -26,16 +27,6 @@ fg.sync("events/**/*.js").map((file) => {
   client.on(event.type, (...args) => event.execute(...args, client));
 });
 
-client.on("clientReady", () => {
-  console.log("Mginex is online!");
-
-  client.application.commands.set(
-    commandContainer.map((command) => {
-      return command.options;
-    })
-  );
-});
-
 client.on("interactionCreate", (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
@@ -43,6 +34,26 @@ client.on("interactionCreate", (interaction) => {
   command.execute(interaction);
 });
 
-client.login(config.token).catch(() => {
-  console.error("Invalid token provided.");
-});
+(async () => {
+  try {
+    const req = await api.get("/open-api/store");
+
+    db.set("store", req.data);
+
+    client.on("clientReady", () => {
+      console.log("Mginex is online!");
+      console.log(`Loja conectada: ${req.data.settings.title}`);
+      console.log(`ID da loja: ${req.data.id}`);
+
+      client.application.commands.set(
+        commandContainer.map((command) => {
+          return command.options;
+        })
+      );
+    });
+
+    client.login(config.token).catch(() => {
+      console.error("Invalid token provided.");
+    });
+  } catch (error) {}
+})();
