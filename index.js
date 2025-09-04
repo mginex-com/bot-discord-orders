@@ -59,7 +59,7 @@ client.on("interactionCreate", (interaction) => {
         });
 
         client.login(config.token).catch(() => {
-            console.error("Invalid token provided!");
+            console.error("Invalid token provided.");
         });
     } catch (error) {}
 })();
