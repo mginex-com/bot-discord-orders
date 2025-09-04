@@ -8,8 +8,8 @@
     },
     "product:01990c12-d6c4-7c0a-baa6-cd0fadf2530a": {
         "id": "01990c12-d6c4-7c0a-baa6-cd0fadf2530a",
-        "title": "Canva PRO",
-        "description": "<p>✅ Você só precisa clicar no link e pronto: sua conta ativa no Pro<br>✅ Funciona na sua conta pessoal (Gmail, Facebook, etc.)<br>✅ Válido Por 1 Mes!<br>✅ Sem precisar compartilhar senha com ninguém</p>",
+        "title": "🔥🔥🔥🔥 CANVA PRO",
+        "description": "FUNCIONA EM TODAS AS VERSÕES DO IOS;\nTUTORIAL COMPLETO DE INSTALAÇÃO NO DOWNLOAD;\nNÃO PRECISA FORMATAR O CELULAR OU ALGO DO TIPO, APENAS INSTALAR.\n\nMENSAL,\n - R$40,00\n\n3 MESES,\n - R$50,00\n\nPERMANENTE,\n - R$60,00\n\nPERMANENTE + BYPASS,\n - R$80,00\n\n\nPARA SABER MAIS SOBRE A DEMONSTRAÇÃO DESSE PRODUTO, DÊ UMA OLHADA NO NO VÍDEO ABAIXO;\n\n\nDA PRA INSTALAR COM PC, NOTEBOOK !!!\n\nNÃO ACEITAMOS BANCO INTER E NEM PICPAY, CASO ULTILIZE ALGUM DESSES BANCOS, VOCÊ SERÁ BANIDO DO SERVIDOR!!!",
         "image": "https://cdn.mginex.com/storage/673feaa6-22b1-4ac1-b3fd-ef50693b5fae.png",
         "footer": null
     },
@@ -44,5 +44,61 @@
         "bans": [],
         "url": "https://ttt.mginex.site"
     },
-    "checkout:1379475047399428096": {}
+    "checkout:1412966704765730866": {
+        "productId": "01990c12-d6c4-7c0a-baa6-cd0fadf2530a",
+        "categoryId": null,
+        "variantId": null,
+        "total": 1,
+        "unitPrice": 1,
+        "quantity": 1,
+        "coupon": {
+            "code": "SjlLNinUsRXqFtiG"
+        }
+    },
+    "checkout:1412967051386945546": {
+        "productId": "01990c12-d6c4-7c0a-baa6-cd0fadf2530a",
+        "categoryId": "01990c08-afc6-78f9-a887-f5317142edca",
+        "variantId": null,
+        "total": 0,
+        "unitPrice": 1,
+        "quantity": 1,
+        "coupon": {
+            "code": "SjlLNinUsRXqFtiG",
+            "type": "FIXED",
+            "amount": 1
+        }
+    },
+    "checkout:1412967358691016834": {
+        "productId": "01990c12-d6c4-7c0a-baa6-cd0fadf2530a",
+        "categoryId": "01990c08-afc6-78f9-a887-f5317142edca",
+        "variantId": null,
+        "total": 2,
+        "unitPrice": 1,
+        "quantity": 3,
+        "coupon": {
+            "code": "SjlLNinUsRXqFtiG",
+            "type": "FIXED",
+            "amount": 1
+        }
+    },
+    "checkout:1412968993953812670": {
+        "productId": "01990c12-d6c4-7c0a-baa6-cd0fadf2530a",
+        "categoryId": "01990c08-afc6-78f9-a887-f5317142edca",
+        "variantId": null,
+        "total": 1,
+        "unitPrice": 1,
+        "quantity": 2,
+        "coupon": {
+            "code": "SjlLNinUsRXqFtiG",
+            "type": "FIXED",
+            "amount": 1
+        }
+    },
+    "product:0199124c-9c94-78f1-b55a-44df8d9ac930": {
+        "id": "0199124c-9c94-78f1-b55a-44df8d9ac930",
+        "title": "CHEAT",
+        "description": "asdsadadsad",
+        "image": "https://cdn.mginex.com/static/images/icons/image-not-found.png",
+        "footer": null
+    }
 }
