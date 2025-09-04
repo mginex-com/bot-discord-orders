@@ -1,6 +1,7 @@
 const { ChannelType, ComponentType, ButtonStyle } = require("discord-api-types/v10");
 const { api, db, getStore, formatPrice } = require("../@shared");
 const { CheckoutPanel, ProductMessage } = require("../@shared/messages");
+const config = require("../config.json");
 
 module.exports = {
     type: "interactionCreate",
@@ -37,14 +38,23 @@ module.exports = {
 
             interaction.message.edit(await ProductMessage(response.data.id));
 
-            const thread = await interaction.channel.threads.create({
-                name: `🛒・${interaction.user.username}・${interaction.user.id}`,
-                type: ChannelType.PrivateThread,
-                reason: "Iniciando checkout",
-                members: [interaction.user.id],
+            const channel = await interaction.guild.channels.create({
+                name: `🛒・${interaction.user.username}`,
+                parent: config.categoryId,
+                permissionOverwrites: [
+                    {
+                        id: interaction.guildId,
+                        deny: ["ViewChannel"],
+                    },
+                    {
+                        id: interaction.user.id,
+                        allow: ["ViewChannel", "ReadMessageHistory"],
+                        deny: ["SendMessages"],
+                    },
+                ],
             });
 
-            db.set(`checkout:${thread.id}`, {
+            db.set(`checkout:${channel.id}`, {
                 productId: product.id,
                 categoryId: product.category?.id || null,
                 variantId: variant?.id || null,
@@ -68,14 +78,14 @@ module.exports = {
                                 type: ComponentType.Button,
                                 style: ButtonStyle.Link,
                                 label: "Acessar carrinho",
-                                url: `https://discord.com/channels/${interaction.guildId}/${thread.id}`,
+                                url: `https://discord.com/channels/${interaction.guildId}/${channel.id}`,
                             },
                         ],
                     },
                 ],
             });
 
-            thread.send(await CheckoutPanel({ interaction, checkoutId: thread.id, product }));
+            channel.send(await CheckoutPanel({ interaction, checkoutId: channel.id, product }));
         });
     },
 };
