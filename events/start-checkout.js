@@ -1,6 +1,6 @@
 const { ChannelType, ComponentType, ButtonStyle } = require("discord-api-types/v10");
 const { api, db, getStore, formatPrice } = require("../@shared");
-const { CheckoutPanel } = require("../@shared/messages");
+const { CheckoutPanel, ProductMessage } = require("../@shared/messages");
 
 module.exports = {
     type: "interactionCreate",
@@ -34,6 +34,8 @@ module.exports = {
                 const result = validateStock(variant.inventory);
                 if (!result) return;
             }
+
+            interaction.message.edit(await ProductMessage(response.data.id));
 
             const thread = await interaction.channel.threads.create({
                 name: `🛒・${interaction.user.username}・${interaction.user.id}`,
