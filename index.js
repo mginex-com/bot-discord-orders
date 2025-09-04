@@ -47,7 +47,7 @@ client.on("interactionCreate", (interaction) => {
         db.set("store", req.data.store);
 
         client.on("clientReady", () => {
-            console.log("Mginex is online!");
+            console.log("rsx is online!");
             console.log(`Loja conectada: ${req.data.store.settings.title}`);
             console.log(`ID da loja: ${req.data.store.id}`);
 
