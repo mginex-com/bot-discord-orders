@@ -86,6 +86,7 @@ module.exports = {
                     const components = [];
 
                     checkout.order = response.data;
+                    checkout.status = "PENDING";
                     db.set(`checkout:${interaction.channelId}`, checkout);
 
                     if (checkout.paymentMethod === "PIX") {
@@ -111,8 +112,8 @@ module.exports = {
                         components.push({
                             type: ComponentType.Button,
                             style: ButtonStyle.Link,
-                            label: "Ir para o site",
-                            url: new URL(`/order/${checkout.order.orderId}`, store.url).toString(),
+                            label: "Pagar no site",
+                            url: checkout.order.payment.paymentLink,
                         });
                         components.push({
                             custom_id: "cancel-checkout",
@@ -121,6 +122,13 @@ module.exports = {
                             style: ButtonStyle.Danger,
                         });
                     }
+
+                    components.push({
+                        type: ComponentType.Button,
+                        style: ButtonStyle.Link,
+                        label: "Ir para o site",
+                        url: new URL(`/order/${checkout.order.orderId}`, store.url).toString(),
+                    });
 
                     interaction.editReply({
                         embeds: [

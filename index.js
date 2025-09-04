@@ -27,6 +27,12 @@ fg.sync("events/**/*.js").map((file) => {
     client.on(event.type, (...args) => event.execute(...args, client));
 });
 
+fg.sync("workers/**/*.js").map((file) => {
+    const worker = require(`./${file}`);
+
+    worker.execute(client);
+});
+
 client.on("interactionCreate", (interaction) => {
     if (!interaction.isChatInputCommand()) return;
 

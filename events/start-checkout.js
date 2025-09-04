@@ -49,6 +49,8 @@ module.exports = {
                 total: variant?.price || product.pricing.price,
                 unitPrice: variant?.price || product.pricing.price,
                 quantity: 1,
+                status: "DRAFT",
+                userId: interaction.user.id,
             });
 
             interaction.editReply({
