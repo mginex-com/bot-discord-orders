@@ -74,7 +74,7 @@ module.exports = {
                         productId: checkout.productId,
                         variantId: checkout.variantId,
                         quantity: checkout.quantity,
-                        fields: checkout.customFields,
+                        fields: checkout.fields,
                     },
                 ],
                 payer: checkout.payer,

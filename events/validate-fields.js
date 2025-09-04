@@ -79,6 +79,8 @@ module.exports = {
                             ],
                         })),
                     });
+                } else {
+                    showGateways();
                 }
             });
         }
@@ -86,7 +88,7 @@ module.exports = {
         if (interaction.isModalSubmit() && interaction.customId === "custom-fields") {
             const checkout = db.get(`checkout:${interaction.channelId}`);
 
-            checkout.customFields = interaction.fields.fields.reduce((prev, current) => {
+            checkout.fields = interaction.fields.fields.reduce((prev, current) => {
                 prev[current.customId] = current.value;
                 return prev;
             }, {});

@@ -21,8 +21,8 @@ module.exports = {
                         db.set(checkout.ID, checkout.data);
 
                         if (data.status !== "PENDING") {
-                            // const channel = await guild.channels.fetch(checkout.ID.split(":")[1]);
-                            // if (!channel) return;
+                            const channel = await guild.channels.cache.get(checkout.ID.split(":")[1]);
+                            if (!channel) return;
 
                             const member = await guild.members.cache.get(checkout.data.userId);
                             if (!member) return;
@@ -48,36 +48,71 @@ module.exports = {
                                 });
                             }
 
-                            member.send({
-                                embeds: [
-                                    {
-                                        title: `Pagamento aprovado com sucesso!`,
-                                        description: [
-                                            "Para sua segurança os items da sua compra estão disponíveis no link logo abaixo, utilize o botão abaixo para navegar até a sua compra e resgatar seu produto.",
-                                            "",
-                                            `💗 Agradeçemos a sua preferência!`,
-                                        ].join("\n"),
-                                        fields,
-                                    },
-                                ],
-                                components: [
-                                    {
-                                        type: ComponentType.ActionRow,
-                                        components: [
-                                            {
-                                                type: ComponentType.Button,
-                                                style: ButtonStyle.Link,
-                                                label: "Resgatar produto",
-                                                url: new URL(`/order/${checkout.data.order.orderId}`, getStore().url).toString(),
-                                            },
-                                        ],
-                                    },
-                                ],
-                            });
+                            member
+                                .send({
+                                    embeds: [
+                                        {
+                                            title: `Pagamento aprovado com sucesso!`,
+                                            description: [
+                                                "Para sua segurança os items da sua compra estão disponíveis no link logo abaixo, utilize o botão abaixo para navegar até a sua compra e resgatar seu produto.",
+                                                "",
+                                                `💗 Agradeçemos a sua preferência!`,
+                                            ].join("\n"),
+                                            fields,
+                                        },
+                                    ],
+                                    components: [
+                                        {
+                                            type: ComponentType.ActionRow,
+                                            components: [
+                                                {
+                                                    type: ComponentType.Button,
+                                                    style: ButtonStyle.Link,
+                                                    label: "Resgatar produto",
+                                                    url: new URL(
+                                                        `/order/${checkout.data.order.orderId}`,
+                                                        getStore().url
+                                                    ).toString(),
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                })
+                                .then((message) => {
+                                    channel
+                                        .send({
+                                            embeds: [
+                                                {
+                                                    title: `Pagamento confirmado com sucesso!`,
+                                                    description: `Seu pagamento foi confirmado e os detalhes do seu pedido está em sua DM!`,
+                                                },
+                                            ],
+                                            components: [
+                                                {
+                                                    type: ComponentType.ActionRow,
+                                                    components: [
+                                                        {
+                                                            type: ComponentType.Button,
+                                                            style: ButtonStyle.Link,
+                                                            label: "Ver detalhes",
+                                                            url: message.url,
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                        })
+                                        .then(() => {
+                                            setTimeout(() => {
+                                                channel.delete();
+                                            }, 30000);
+                                        })
+                                        .catch(() => {});
+                                })
+                                .catch(() => {});
                         }
                     });
                 }
-            }, 1000);
+            }, 30000);
         });
     },
 };

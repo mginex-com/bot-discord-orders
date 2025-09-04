@@ -51,6 +51,9 @@ module.exports = {
                 quantity: 1,
                 status: "DRAFT",
                 userId: interaction.user.id,
+                payer: {},
+                fields: {},
+                createdAt: new Date(),
             });
 
             interaction.editReply({
