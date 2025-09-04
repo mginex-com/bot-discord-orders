@@ -1,4 +1,11 @@
 {
     "token": "MTM4NDUxNjY5NzkzOTEyMDE1OA.G2o_UK.68Txrwg8XAPxKkaXTT1u0rSeuk2cJNGfXPa4gE",
-    "apiKey": "01991153-9eae-76e7-b6b8-e99882c722cd-01991153-9eae-76e7-b6b8-e999561464ad"
+    "apiKey": "01991153-9eae-76e7-b6b8-e99882c722cd-01991153-9eae-76e7-b6b8-e999561464ad",
+    "emojis": {
+        "paymentMethods": {
+            "PIX": "❤",
+            "MERCADO_PAGO": "❤",
+            "STRIPE": "❤"
+        }
+    }
 }
