@@ -13,7 +13,7 @@ module.exports = {
                     return (
                         ((entry.ID.startsWith("checkout:") && entry.data.status === "PENDING") ||
                             entry.data.status === "DRAFT") &&
-                        differenceInMinutes(entry.data.createdAt, new Date()) >= 5
+                        differenceInMinutes(new Date(), entry.data.createdAt) >= 5
                     );
                 });
 
