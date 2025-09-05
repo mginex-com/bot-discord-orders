@@ -80,7 +80,7 @@ module.exports = {
                 payer: checkout.payer,
                 paymentMethod: checkout.paymentMethod,
                 referenceCode: null,
-                couponCode: checkout.coupon.code,
+                couponCode: checkout.coupon?.code,
                 utmParams: null,
             })
                 .then((response) => {
