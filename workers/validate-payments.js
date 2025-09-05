@@ -44,8 +44,8 @@ module.exports = {
                                     fields.push({
                                         name: `Cupom (\`${checkout.data.coupon.code}\`):`,
                                         value: `\`\`\`-${formatValue(
-                                            checkout.data.coupon.discount.type,
-                                            checkout.data.coupon.discount.amount
+                                            checkout.data.coupon.type,
+                                            checkout.data.coupon.amount
                                         )}\`\`\``,
                                     });
                                 }
