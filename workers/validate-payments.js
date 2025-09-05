@@ -50,36 +50,57 @@ module.exports = {
                                     });
                                 }
 
-                                member
-                                    .send({
-                                        embeds: [
-                                            {
-                                                title: `Pagamento aprovado com sucesso!`,
-                                                description: [
-                                                    "Para sua segurança os items da sua compra estão disponíveis no link logo abaixo, utilize o botão abaixo para navegar até a sua compra e resgatar seu produto.",
-                                                    "",
-                                                    `💗 Agradeçemos a sua preferência!`,
-                                                ].join("\n"),
-                                                fields,
-                                            },
-                                        ],
-                                        components: [
-                                            {
-                                                type: ComponentType.ActionRow,
-                                                components: [
-                                                    {
-                                                        type: ComponentType.Button,
-                                                        style: ButtonStyle.Link,
-                                                        label: "Resgatar produto",
-                                                        url: new URL(
-                                                            `/order/${checkout.data.order.orderId}`,
-                                                            getStore().url
-                                                        ).toString(),
-                                                    },
-                                                ],
-                                            },
-                                        ],
+                                await api
+                                    .get("/open-api/checkout/order/" + checkout.data.order.orderId)
+                                    .then((response) => {
+                                        const data = response.data;
+                                        const inventory = data.items[0].inventory;
+
+                                        fields.push({
+                                            name: `Estoque:`,
+                                            value: `\`\`\`${
+                                                inventory.type === "SERIAL"
+                                                    ? inventory.serials
+                                                    : inventory.type === "TEXT"
+                                                    ? inventory.text
+                                                    : inventory.file
+                                            }\`\`\``,
+                                        });
                                     })
+                                    .catch(() => {});
+
+                                const payload = {
+                                    embeds: [
+                                        {
+                                            title: `Pagamento aprovado com sucesso!`,
+                                            description: [
+                                                "Para sua segurança os items da sua compra estão disponíveis no link logo abaixo, utilize o botão abaixo para navegar até a sua compra e resgatar seu produto.",
+                                                "",
+                                                `💗 Agradeçemos a sua preferência!`,
+                                            ].join("\n"),
+                                            fields,
+                                        },
+                                    ],
+                                    components: [
+                                        {
+                                            type: ComponentType.ActionRow,
+                                            components: [
+                                                {
+                                                    type: ComponentType.Button,
+                                                    style: ButtonStyle.Link,
+                                                    label: "Resgatar produto",
+                                                    url: new URL(
+                                                        `/order/${checkout.data.order.orderId}`,
+                                                        getStore().url
+                                                    ).toString(),
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                };
+
+                                member
+                                    .send(payload)
                                     .then((message) => {
                                         channel
                                             .send({
@@ -110,7 +131,9 @@ module.exports = {
                                             })
                                             .catch(() => {});
                                     })
-                                    .catch(() => {});
+                                    .catch(() => {
+                                        channel.send(payload);
+                                    });
                             }
                         });
                 }
