@@ -19,6 +19,12 @@ module.exports = {
     async execute(interaction) {
         const productId = interaction.options.getString("id-produto");
 
+        if (!interaction.memberPermissions.has(PermissionFlagsBits.Administrator))
+            return interaction.reply({
+                content: "Você não está autorizado usar este comando",
+                ephemeral: true,
+            });
+
         api.get(`/open-api/catalog/product/${productId}`).then((response) => {
             const product = response.data;
 
