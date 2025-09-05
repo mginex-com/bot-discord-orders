@@ -46,7 +46,7 @@ module.exports = {
                                 label: "Descrição",
                                 type: ComponentType.TextInput,
                                 style: TextInputStyle.Paragraph,
-                                value: product.info.description.slice(0, 1000),
+                                value: product.info.description?.slice(0, 1000),
                                 required: false,
                             },
                         ],
