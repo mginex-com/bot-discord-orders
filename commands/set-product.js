@@ -1,4 +1,10 @@
-const { ApplicationCommandType, ApplicationCommandOptionType, ComponentType, TextInputStyle } = require("discord.js");
+const {
+    ApplicationCommandType,
+    ApplicationCommandOptionType,
+    ComponentType,
+    TextInputStyle,
+    PermissionFlagsBits,
+} = require("discord.js");
 const { api } = require("../@shared");
 
 module.exports = {
