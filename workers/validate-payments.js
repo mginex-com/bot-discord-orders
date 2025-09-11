@@ -19,7 +19,7 @@ module.exports = {
                         .then(async (response) => {
                             const data = response.data;
 
-                            checkout.data.status = data.status;
+                            checkout.data.status = "APPROVED";
                             db.set(checkout.ID, checkout.data);
 
                             if (data.status !== "PENDING") {
@@ -99,41 +99,8 @@ module.exports = {
                                     ],
                                 };
 
-                                member
-                                    .send(payload)
-                                    .then((message) => {
-                                        channel
-                                            .send({
-                                                embeds: [
-                                                    {
-                                                        title: `Pagamento confirmado com sucesso!`,
-                                                        description: `Seu pagamento foi confirmado e os detalhes do seu pedido está em sua DM!`,
-                                                    },
-                                                ],
-                                                components: [
-                                                    {
-                                                        type: ComponentType.ActionRow,
-                                                        components: [
-                                                            {
-                                                                type: ComponentType.Button,
-                                                                style: ButtonStyle.Link,
-                                                                label: "Ver detalhes",
-                                                                url: message.url,
-                                                            },
-                                                        ],
-                                                    },
-                                                ],
-                                            })
-                                            .then(() => {
-                                                setTimeout(() => {
-                                                    channel.delete();
-                                                }, 30000);
-                                            })
-                                            .catch(() => {});
-                                    })
-                                    .catch(() => {
-                                        channel.send(payload);
-                                    });
+                                channel.send(payload).catch(() => {});
+                                member.send(payload).catch(() => {});
                             }
                         });
                 }

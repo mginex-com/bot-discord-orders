@@ -1,1 +1,83 @@
-{}
+{
+    "store": {
+        "id": "019920e5-0760-7f48-8457-b7f15e550430",
+        "createdAt": "2025-09-06T21:18:21.950Z",
+        "updatedAt": "2025-09-11T17:07:43.000Z",
+        "ownerId": "019920e4-e6a7-7a76-acd4-87885dea339a",
+        "templateId": "delux",
+        "settings": {
+            "title": "asdad",
+            "subDomain": "asdad",
+            "contactInfo": {
+                "email": null,
+                "corporation": null,
+                "socialMedia": {}
+            },
+            "currency": "BRL",
+            "domain": null,
+            "description": "A melhor loja de produtos digitais com entrega imediata e suporte eficiente.",
+            "terms": null,
+            "isMaintenceEnabled": false,
+            "checkoutSettings": {
+                "forceAuth": false
+            }
+        },
+        "theme": {
+            "logo": "https://cdn.mginex.com/storage/a95ab65f-bc30-42d5-b4f7-c2c333332859.png",
+            "favicon": "https://cdn.mginex.com/storage/a95ab65f-bc30-42d5-b4f7-c2c333332859.png",
+            "primaryColor": "#7b61ff"
+        },
+        "status": "ACTIVE",
+        "bannedAt": null,
+        "bannedReason": null,
+        "bans": [],
+        "url": "http://asdad.localhost:4005",
+        "gateways": [
+            {
+                "name": "PIX",
+                "fee": 1,
+                "feeEnabled": false,
+                "feeType": "FIXED",
+                "requiredFields": [
+                    "name",
+                    "surname",
+                    "email"
+                ]
+            }
+        ],
+        "plugins": []
+    },
+    "product:0199213d-c153-707f-92aa-a80c9a5882ad": {
+        "id": "0199213d-c153-707f-92aa-a80c9a5882ad",
+        "title": "adasd",
+        "description": null,
+        "image": "https://cdn.mginex.com/static/images/icons/image-not-found.png",
+        "footer": null
+    },
+    "checkout:1415767337679847514": {
+        "productId": "0199213d-c153-707f-92aa-a80c9a5882ad",
+        "categoryId": "0199213d-9a9b-7521-9e0d-6805176f8b06",
+        "variantId": null,
+        "total": 1,
+        "unitPrice": 1,
+        "quantity": 1,
+        "status": "COMPLETED",
+        "userId": "1379475047399428096",
+        "payer": {
+            "name": "test",
+            "surname": "teste",
+            "email": "asd@gmail.com"
+        },
+        "fields": {},
+        "createdAt": "2025-09-11T18:33:59.102Z",
+        "paymentMethod": "PIX",
+        "order": {
+            "orderId": "01993a0e-713e-70db-90ee-c4b3dd6f30e8",
+            "payment": {
+                "pixCode": "00020101021226830014BR.GOV.BCB.PIX2561qrcodespix.sejaefi.com.br/v2/1800998895cf40979c791f712ae5162a5204000053039865802BR5905EFISA6008SAOPAULO62070503***63041878",
+                "qrCode": "data:image/png;base64,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",
+                "paymentLink": "https://pix.sejaefi.com.br/cob/pagar/1800998895cf40979c791f712ae5162a"
+            }
+        }
+    }
+}

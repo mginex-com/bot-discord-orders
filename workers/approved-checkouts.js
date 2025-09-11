@@ -1,6 +1,6 @@
 const { db } = require("../@shared");
 const config = require("../config.json");
-const { differenceInMinutes } = require("date-fns");
+const { differenceInMinutes, differenceInSeconds } = require("date-fns");
 
 module.exports = {
     execute: (client) => {
@@ -9,11 +9,12 @@ module.exports = {
 
             setInterval(async () => {
                 const all = db.all();
+
                 const checkouts = all.filter((entry) => {
                     return (
-                        ((entry.ID.startsWith("checkout:") && entry.data.status === "PENDING") ||
-                            entry.data.status === "DRAFT") &&
-                        differenceInMinutes(new Date(), entry.data.createdAt) >= 5
+                        entry.ID.startsWith("checkout:") &&
+                        entry.data.status === "APPROVED" &&
+                        differenceInSeconds(new Date(), entry.data.createdAt) >= 30
                     );
                 });
 
@@ -25,13 +26,8 @@ module.exports = {
                     if (!member) return;
 
                     channel.delete().catch(() => {});
-                    member
-                        .send({
-                            content: `Seu carrinho foi fechado automaticamente por não realizar o pagamento após 5 minutos.`,
-                        })
-                        .catch(() => {});
 
-                    checkout.data.status = "CLOSED";
+                    checkout.data.status = "COMPLETED";
                     db.set(checkout.ID, checkout.data);
                 }
             }, 1000 * 60);

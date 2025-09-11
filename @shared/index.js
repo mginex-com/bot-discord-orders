@@ -8,7 +8,7 @@ const db = new JsonDatabase({
 
 module.exports = {
     api: axios.create({
-        baseURL: "https://api.mginex.com",
+        baseURL: "http://localhost:5000",
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${config.apiKey}`,

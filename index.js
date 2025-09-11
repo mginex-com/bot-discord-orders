@@ -40,6 +40,18 @@ client.on("interactionCreate", (interaction) => {
     command.execute(interaction);
 });
 
+const logger = {
+    error: function (...args) {
+        return console.error("[❌ ERRO]", ...args);
+    },
+    info: function (...args) {
+        return console.info("[💜 INFO]", ...args);
+    },
+    warn: function (...args) {
+        return console.warn("[🟡 IMPORTANTE]", ...args);
+    },
+};
+
 (async () => {
     try {
         const req = await api.get("/open-api/store");
@@ -47,9 +59,25 @@ client.on("interactionCreate", (interaction) => {
         db.set("store", req.data.store);
 
         client.on("clientReady", () => {
-            console.log("Mginexx is online!");
-            console.log(`Loja conectada: ${req.data.store.settings.title}`);
-            console.log(`ID da loja: ${req.data.store.id}`);
+            logger.info(`Bot conectado: ${client.user.displayName}`);
+            logger.info(`Loja conectada: ${req.data.store.settings.title}`);
+            logger.info(`URL da loja: ${req.data.store.url}`);
+
+            client.guilds
+                .fetch(config.guildId)
+                .catch(() => {
+                    logger.error(`O servidor (${config.guildId}) não foi encontrado neste bot.`);
+                    process.exit(1);
+                })
+                .then((guild) => {
+                    logger.info(`Servidor conectado: ${guild.name}`);
+                    guild.channels.fetch(config.categoryId).catch(() => {
+                        logger.error(
+                            `A categoria do carrinho (${config.categoryId}) não foi encontrado no servidor (${guild.name}).`
+                        );
+                        process.exit(1);
+                    });
+                });
 
             client.application.commands.set(
                 commandContainer.map((command) => {
@@ -58,8 +86,15 @@ client.on("interactionCreate", (interaction) => {
             );
         });
 
-        client.login(config.token).catch(() => {
-            console.error("Invalid token provided.");
+        client.login(config.token).catch((err) => {
+            if (err?.name?.includes("TokenInvalid")) return logger.error("A token do bot está inválida");
+            if (err?.message?.includes("Used disallowed intents"))
+                return logger.error(
+                    "Você precisa habilitar as permissões de itents: Presence Intent, Server Members Intent, Message Content Intent"
+                );
+            return logger.error(err?.message);
         });
-    } catch (error) {}
+    } catch (error) {
+        logger.error("A chave de acesso da API mginex está inválida, siga o tutorial: https://www.youtube.com/@mginex");
+    }
 })();
