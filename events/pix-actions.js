@@ -16,12 +16,23 @@ module.exports = {
         if (interaction.isButton() && interaction.customId === "qr-code") {
             const checkout = db.get(`checkout:${interaction.channel.id}`);
 
-            const attachment = new AttachmentBuilder(
-                checkout.order.payment.qrCode.startsWith("data:image")
-                    ? Buffer.from(checkout.order.payment.qrCode.split(",")[1], "base64")
-                    : Buffer.from(checkout.order.qrCode, "base64"),
-                { name: "qrcode.png" }
-            );
+            let attachment = null;
+            let imageUrl = qrCode;
+
+            if (qrCode.startsWith("data:image")) {
+                const base64Data = qrCode.split(",")[1];
+                attachment = new AttachmentBuilder(Buffer.from(base64Data, "base64"), {
+                    name: "qrcode.png",
+                });
+                imageUrl = "attachment://qrcode.png";
+            } else if (isBase64(qrCode)) {
+                attachment = new AttachmentBuilder(Buffer.from(qrCode, "base64"), {
+                    name: "qrcode.png",
+                });
+                imageUrl = "attachment://qrcode.png";
+            } else if (!qrCode.startsWith("http")) {
+                imageUrl = null;
+            }
 
             interaction.reply({
                 embeds: [
@@ -35,11 +46,11 @@ module.exports = {
                                 value: `\`\`\`${checkout.order.payment.pixCode}\`\`\``,
                             },
                         ],
-                        image: {
-                            url: checkout.order.payment.qrCode.startsWith("https://")
-                                ? checkout.order.payment.qrCode
-                                : "attachment://qrcode.png",
-                        },
+                        ...(imageUrl
+                            ? {
+                                  image: { url: imageUrl },
+                              }
+                            : {}),
                     },
                 ],
                 files: [attachment],
