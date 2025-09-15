@@ -1,6 +1,14 @@
 const { AttachmentBuilder } = require("discord.js");
 const { db } = require("../@shared");
 
+function isBase64(str) {
+    try {
+        return Buffer.from(str, "base64").toString("base64") === str.replace(/\s/g, "");
+    } catch (e) {
+        return false;
+    }
+}
+
 module.exports = {
     type: "interactionCreate",
     execute: async (interaction) => {
