@@ -15,6 +15,7 @@ module.exports = {
 
         if (interaction.isButton() && interaction.customId === "qr-code") {
             const checkout = db.get(`checkout:${interaction.channel.id}`);
+            const qrCode = checkout.order.payment.qrCode;
 
             let attachment = null;
             let imageUrl = qrCode;
